@@ -7,7 +7,7 @@ var myChart = new Chart(ctx, {
             label: '',
             data: [20, 26, 22, 3, 6, 1, 3],
             backgroundColor: [
-                '#ff0800'
+                '#92B9BD'
             ]
         },
     ]
@@ -17,15 +17,19 @@ var myChart = new Chart(ctx, {
         plugins: {
             title: {
                 display: true,
-                text: 'GDP BY Country',
+                text: 'Police misconduct is by far the most common lawsuit against Baltimore Police 2015-2018',
                 font: {
                     size: 18
                 }
             },
+            subtitle: {
+                display: true,
+                text: 'There were 82 court cases filed against Baltimore Police 2015-2018, according to data from FiveThirtyEight'
+            }
         },
         scales: {
             y: {
-                beginAtZero: true
+                beginAtZero: true,
             }
         },
     },
