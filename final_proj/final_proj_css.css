@@ -31,3 +31,12 @@ iframe {
     margin-right: 0%;
   }
 
+  .lowkey {
+    font-family: 'times', serif;
+    font-size: 0.5em;
+    font-weight: lighter;
+    color: black;
+    margin-left: 0%;
+    margin-right: 0%;
+  }
+
