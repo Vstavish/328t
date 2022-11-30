@@ -1,0 +1,130 @@
+---
+title: "328t_final_proj"
+author: "Victoria Stavish"
+date: "2022-11-29"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# load libraries
+
+```{r}
+
+library(tidyverse)
+library(dplyr)
+library(writexl)
+library(janitor)
+library(readxl)
+library(openxlsx)
+
+```
+
+# load data 
+
+```{r}
+
+data <- read_excel("salary_2022.xlsx")
+
+```
+
+# filterfor all positions across all schools
+
+```{r}
+
+all_positions <- data %>%
+  clean_names() %>%
+  select(division, category_status, category_status_cd, appt_base_annual_salary) %>%
+  filter(grepl("Tenured Faculty|Tenure Track Faculty|Non-Tenured,Cont. Contr. Faculty|Non-Tenured, Term. Contr. Faculty|Non-Tenured, Non-Regular Faculty", category_status)) %>%
+  filter(!str_detect("VP Research|Graduate School|Undergraduate Studies| Office of the President|Sr VP Academic Affairs & Provost|VP Student Affairs|Universities at Shady Grove|Office of Extended Studies|Libraries", division)) 
+
+write.xlsx(all_positions, file = 'C:/Users/Vstav/OneDrive/Documents/GitHub/328t/final_proj/salary_data.xlsx')
+
+```
+
+# separated by division
+
+```{r}
+
+engineering <- data %>%
+  as.data.frame() %>%
+  clean_names() %>%
+  filter(grepl("Tenured Faculty|Tenure Track Faculty|Non-Tenured,Cont. Contr. Faculty|Non-Tenured, Term. Contr. Faculty|Non-Tenured, Non-Regular Faculty", category_status_cd)) %>%
+  filter(division == "A. James Clark School of Engineering") 
+
+cmns <- data %>%
+  as.data.frame() %>%
+  clean_names() %>%
+  filter(grepl("Tenured Faculty|Tenure Track Faculty|Non-Tenured,Cont. Contr. Faculty|Non-Tenured, Term. Contr. Faculty|Non-Tenured, Non-Regular Faculty", category_status)) %>%
+  filter(division == "College of Computer, Math & Natural Sciences") 
+
+agr <- data %>%
+  as.data.frame() %>%
+  clean_names() %>%
+  filter(grepl("Tenured Faculty|Tenure Track Faculty|Non-Tenured,Cont. Contr. Faculty|Non-Tenured, Term. Contr. Faculty|Non-Tenured, Non-Regular Faculty", category_status)) %>%
+  filter(division == "College of Agriculture & Natural Resources") 
+
+arhu <- data %>%
+  as.data.frame() %>%
+  clean_names() %>%
+  filter(grepl("Tenured Faculty|Tenure Track Faculty|Non-Tenured,Cont. Contr. Faculty|Non-Tenured, Term. Contr. Faculty|Non-Tenured, Non-Regular Faculty", category_status)) %>%
+  filter(division == "College of Arts & Humanities") 
+
+bsos <- data %>%
+  as.data.frame() %>%
+  clean_names() %>%
+  filter(grepl("Tenured Faculty|Tenure Track Faculty|Non-Tenured,Cont. Contr. Faculty|Non-Tenured, Term. Contr. Faculty|Non-Tenured, Non-Regular Faculty", category_status)) %>%
+  filter(division == "College of Behavioral & Social Sciences") 
+
+education <- data %>%
+  as.data.frame() %>%
+  clean_names() %>%
+  filter(grepl("Tenured Faculty|Tenure Track Faculty|Non-Tenured,Cont. Contr. Faculty|Non-Tenured, Term. Contr. Faculty|Non-Tenured, Non-Regular Faculty", category_status)) %>%
+  filter(division == "College of Education") 
+
+infosci <- data %>%
+  as.data.frame() %>%
+  clean_names() %>%
+  filter(grepl("Tenured Faculty|Tenure Track Faculty|Non-Tenured,Cont. Contr. Faculty|Non-Tenured, Term. Contr. Faculty|Non-Tenured, Non-Regular Faculty", category_status)) %>%
+  filter(division == "College of Information Studies") 
+
+jour <- data %>%
+  as.data.frame() %>%
+  clean_names() %>%
+  filter(grepl("Tenured Faculty|Tenure Track Faculty|Non-Tenured,Cont. Contr. Faculty|Non-Tenured, Term. Contr. Faculty|Non-Tenured, Non-Regular Faculty", category_status)) %>%
+  filter(division == "Philip Merrill College of Journalism")  
+
+business <- data %>%
+  as.data.frame() %>%
+  clean_names() %>%
+  filter(grepl("Tenured Faculty|Tenure Track Faculty|Non-Tenured,Cont. Contr. Faculty|Non-Tenured, Term. Contr. Faculty|Non-Tenured, Non-Regular Faculty", category_status)) %>%
+  filter(division == "Robert H. Smith School of Business") 
+
+arch <- data %>%
+  as.data.frame() %>%
+  clean_names() %>%
+  filter(grepl("Tenured Faculty|Tenure Track Faculty|Non-Tenured,Cont. Contr. Faculty|Non-Tenured, Term. Contr. Faculty|Non-Tenured, Non-Regular Faculty", category_status)) %>%
+  filter(division == "School of Architecture, Planning, & Preservation")  
+
+sph <- data %>%
+  as.data.frame() %>%
+  clean_names() %>%
+  filter(grepl("Tenured Faculty|Tenure Track Faculty|Non-Tenured,Cont. Contr. Faculty|Non-Tenured, Term. Contr. Faculty|Non-Tenured, Non-Regular Faculty", category_status)) %>%
+  filter(division == "School of Public Health")
+
+policy <- data %>%
+  as.data.frame() %>%
+  clean_names() %>%
+  filter(grepl("Tenured Faculty|Tenure Track Faculty|Non-Tenured,Cont. Contr. Faculty|Non-Tenured, Term. Contr. Faculty|Non-Tenured, Non-Regular Faculty", category_status)) %>%
+  filter(division == "School of Public Policy") 
+
+all_divs <- list('Sheet1' = engineering, 'Sheet2' = cmns, 'Sheet3' = agr, 'Sheet4' = arhu, 'Sheet5' = bsos, 'Sheet6' = education, 'Sheet7' = infosci, 'Sheet8' = jour, 'Sheet9' = business, 'Sheet10' = arch, 'Sheet11' = sph, 'Sheet12' = policy)
+write.xlsx(all_divs, file = 'C:/Users/Vstav/OneDrive/Documents/GitHub/328t/final_proj/salary_by_division.xlsx')
+
+```
+
+
+
+

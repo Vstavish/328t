@@ -1,0 +1,33 @@
+
+iframe {
+    margin-top: 20px;
+    width: 200px;
+  }
+
+  .title {
+    font-family: 'times', serif;
+    font-size: 3em;
+    font-weight: bold;
+    color: black;
+    margin-left: 20%;
+    margin-right: 10%;
+  }
+
+  .author {
+    font-family: 'times', serif;
+    font-size: 0.4em;
+    font-weight: bold;
+    color: black;
+    margin-left: 45%;
+    margin-right: 10%;
+  }
+
+  .text {
+    font-family: 'times', serif;
+    font-size: 0.75em;
+    font-weight: lighter;
+    color: black;
+    margin-left: 0%;
+    margin-right: 0%;
+  }
+
