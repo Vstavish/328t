@@ -4,33 +4,66 @@ iframe {
     width: 200px;
   }
 
-  .title {
-    font-family: 'times', serif;
-    font-size: 3em;
-    font-weight: bold;
-    color: black;
-    margin-left: 20%;
-    margin-right: 10%;
+  .jumbotron text-center {
+    width: fill;
+    height: auto;
+    margin-left: 10%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
-
-  .author {
-    font-family: 'times', serif;
-    font-size: 0.4em;
-    font-weight: bold;
-    color: black;
-    margin-left: 45%;
-    margin-right: 10%;
-  }
-
+  
   .text {
-    font-family: 'times', serif;
-    font-size: 0.75em;
-    font-weight: lighter;
+    font-size: 1.25em;
+    font-weight: light;
     color: black;
-    margin-left: 0%;
-    margin-right: 0%;
+    margin-right: 10%;
+    margin-left: 10%;
   }
 
+
+/* Add a black background color to the top navigation */
+.navbar {
+  overflow: hidden;
+  overflow: hidden;
+  position: fixed; /* Set the navbar to fixed position */
+  top: 0; /* Position the navbar at the top of the page */
+  width: 100%; /* Full width */
+  background-color:white;
+}
+
+/* Style the links inside the navigation bar */
+.navbar a {
+  float: left;
+  font-family: 'times', serif;
+  display: block;
+  color: black;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 25px;
+  margin-left: 2%;
+}
+
+
+/* Change the color of links on hover */
+.navbar a:hover {
+  background-color: #C2C1C2;
+  color: black;
+}
+
+/* Add an active class to highlight the current page */
+.navbar a.active {
+  background-color: #C2C1C2;
+  color: black;
+}
+
+/* Hide the link that should open and close the topnav on small screens */
+.navbar .icon {
+  display: none;
+}
+
+     /*
   .lowkey {
     font-family: 'times', serif;
     font-size: 0.5em;
@@ -40,3 +73,79 @@ iframe {
     margin-right: 0%;
   }
 
+  */
+
+  .col-sm-4 {
+    width: 30%;
+    height: 80%;
+  }
+
+  .col-md-12 {
+display: grid;
+place-items: center;
+  }
+
+  .flourish-embed {
+display: grid;
+place-items: center;
+height: 70%;
+  }
+
+  .img-fluid {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .text1{
+    text-decoration: underline;  
+    text-decoration-color:  #FF8600;
+    margin-right: 10%;
+    margin-left: 10%;
+  }
+
+  .text2{
+    text-decoration: underline;  
+    text-decoration-color: #23395B;   
+    margin-right: 10%;
+    margin-left: 10%;
+  }
+
+  .text3{
+    text-decoration: underline;  
+    text-decoration-color: #96C3CE; 
+    margin-right: 10%;
+    margin-left: 10%;  
+  }
+
+  .text4{
+    text-decoration: underline;  
+    text-decoration-color: #B57BA6;  
+    margin-right: 10%;
+    margin-left: 10%;
+  }
+
+  .text5{
+    text-decoration: underline;  
+    text-decoration-color: #9EB25D; 
+    margin-right: 10%;
+    margin-left: 10%; 
+  }
+
+  .text-search {
+    color: black;
+    font-size: 2.5em;
+    display: grid;
+place-items: center;
+text-align: center;
+  }
+
+  .text-search2 {
+    color: black;
+    font-size: 1.5em;
+    display: grid;
+place-items: center;
+text-align: center;
+margin-right: 25%;
+margin-left: 25%;
+  }

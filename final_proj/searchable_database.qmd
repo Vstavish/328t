@@ -1,0 +1,82 @@
+
+
+
+```{r}
+#| label: load_libraries_settings
+#| include: false
+
+library(tidyverse)
+library(dplyr)
+library(writexl)
+library(janitor)
+library(readxl)
+library(openxlsx)
+
+pacman::p_load(tidyverse, crosstalk, DT, lubridate, plotly, reactable, gt, summarywidget, here, glue, janitor, googlesheets4, googledrive, ggthemes, devtools, knitr, kableExtra,tidytext,textstem)
+
+# for Windows users, explicitly loading splitstackshape library
+library(splitstackshape)
+
+```
+
+
+```{r}
+#| label: load_data
+#| include: false
+
+data <- read_excel("salary_2022.xlsx")
+
+```
+
+
+```{r}
+#| label: analysis
+#| include: false
+
+all_positions <- data %>%
+  clean_names() %>%
+  select(division, category_status, category_status_cd, appt_base_annual_salary, primary_name) %>%
+  filter(grepl("Tenured Faculty|Tenure Track Faculty|Non-Tenured,Cont. Contr. Faculty|Non-Tenured, Term. Contr. Faculty|Non-Tenured, Non-Regular Faculty", category_status)) %>%
+  filter(!str_detect("VP Research|Graduate School|Undergraduate Studies| Office of the President|Sr VP Academic Affairs & Provost|VP Student Affairs|Universities at Shady Grove|Office of Extended Studies|Libraries", division))
+
+
+# Create a list of columns you want to hide on load
+hidden_columns <- as.numeric(c(12:(ncol(all_positions)-1)))
+
+# Remove columnDefs if you don't want to hide any columns
+all_positions <- all_positions |> 
+  datatable(   
+    filter = "top", 
+    extensions = c(
+      "Buttons"
+    ), 
+    rownames=FALSE,
+    escape=FALSE,
+    #    style="bootstrap", 
+    class="compact cell-border stripe", 
+    width="100%", 
+    options = list (
+      columnDefs = list(list(visible=FALSE, targets=hidden_columns)
+                        ),
+      dom = "Blftipr",
+      deferRender=TRUE,
+      autoWidth=TRUE,
+      pageLength = 10,
+      buttons = list(
+          "colvis",
+          "csv",
+          list(extend = 'excel', title = NULL)
+          )
+      )
+    )
+
+```
+
+ 
+
+```{r}
+
+all_positions
+
+```
+

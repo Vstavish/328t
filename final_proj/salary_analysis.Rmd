@@ -30,13 +30,13 @@ data <- read_excel("salary_2022.xlsx")
 
 ```
 
-# filterfor all positions across all schools
+# filter for all positions across all schools
 
 ```{r}
 
 all_positions <- data %>%
   clean_names() %>%
-  select(division, category_status, category_status_cd, appt_base_annual_salary) %>%
+  select(division, category_status, category_status_cd, appt_base_annual_salary, primary_name) %>%
   filter(grepl("Tenured Faculty|Tenure Track Faculty|Non-Tenured,Cont. Contr. Faculty|Non-Tenured, Term. Contr. Faculty|Non-Tenured, Non-Regular Faculty", category_status)) %>%
   filter(!str_detect("VP Research|Graduate School|Undergraduate Studies| Office of the President|Sr VP Academic Affairs & Provost|VP Student Affairs|Universities at Shady Grove|Office of Extended Studies|Libraries", division)) 
 
@@ -49,7 +49,6 @@ all_positions_count <- data %>%
   group_by(primary_name) %>%
   count()
 
-all_positions <- all_positions %>%
   
 
 ```
@@ -144,7 +143,11 @@ count_engineering <- data %>%
   clean_names() %>%
   filter(grepl("Tenured Faculty|Tenure Track Faculty|Non-Tenured,Cont. Contr. Faculty|Non-Tenured, Term. Contr. Faculty|Non-Tenured, Non-Regular Faculty", category_status)) %>%
   filter(division == "A. James Clark School of Engineering") %>%
-  group_by(primary_name) %>%
+  group_by(appt_base_annual_salary, primary_name, category_status) %>%
+  count()
+
+count_engineering <- count_engineering %>%
+  group_by(category_status) %>%
   count()
 
 count_cmns <- data %>%
@@ -152,7 +155,11 @@ count_cmns <- data %>%
   clean_names() %>%
   filter(grepl("Tenured Faculty|Tenure Track Faculty|Non-Tenured,Cont. Contr. Faculty|Non-Tenured, Term. Contr. Faculty|Non-Tenured, Non-Regular Faculty", category_status)) %>%
   filter(division == "College of Computer, Math & Natural Sciences") %>%
-  group_by(primary_name) %>%
+  group_by(appt_base_annual_salary, primary_name, category_status) %>%
+  count()
+
+count_cmns <- count_cmns %>%
+  group_by(category_status) %>%
   count()
 
 count_agr <- data %>%
@@ -160,7 +167,11 @@ count_agr <- data %>%
   clean_names() %>%
   filter(grepl("Tenured Faculty|Tenure Track Faculty|Non-Tenured,Cont. Contr. Faculty|Non-Tenured, Term. Contr. Faculty|Non-Tenured, Non-Regular Faculty", category_status)) %>%
   filter(division == "College of Agriculture & Natural Resources") %>%
-  group_by(primary_name) %>%
+  group_by(appt_base_annual_salary, primary_name, category_status) %>%
+  count()
+
+count_agr <- count_agr %>%
+  group_by(category_status) %>%
   count()
 
 count_arhu <- data %>%
@@ -168,7 +179,11 @@ count_arhu <- data %>%
   clean_names() %>%
   filter(grepl("Tenured Faculty|Tenure Track Faculty|Non-Tenured,Cont. Contr. Faculty|Non-Tenured, Term. Contr. Faculty|Non-Tenured, Non-Regular Faculty", category_status)) %>%
   filter(division == "College of Arts & Humanities") %>%
-  group_by(primary_name) %>%
+  group_by(appt_base_annual_salary, primary_name, category_status) %>%
+  count()
+
+count_arhu <- count_arhu %>%
+  group_by(category_status) %>%
   count()
 
 count_bsos <- data %>%
@@ -176,7 +191,11 @@ count_bsos <- data %>%
   clean_names() %>%
   filter(grepl("Tenured Faculty|Tenure Track Faculty|Non-Tenured,Cont. Contr. Faculty|Non-Tenured, Term. Contr. Faculty|Non-Tenured, Non-Regular Faculty", category_status)) %>%
   filter(division == "College of Behavioral & Social Sciences") %>%
-  group_by(primary_name) %>%
+  group_by(appt_base_annual_salary, primary_name, category_status) %>%
+  count()
+
+count_bsos <- count_bsos %>%
+  group_by(category_status) %>%
   count()
 
 count_education <- data %>%
@@ -184,7 +203,11 @@ count_education <- data %>%
   clean_names() %>%
   filter(grepl("Tenured Faculty|Tenure Track Faculty|Non-Tenured,Cont. Contr. Faculty|Non-Tenured, Term. Contr. Faculty|Non-Tenured, Non-Regular Faculty", category_status)) %>%
   filter(division == "College of Education") %>%
-  group_by(primary_name) %>%
+  group_by(appt_base_annual_salary, primary_name, category_status) %>%
+  count()
+
+count_education <- count_education %>%
+  group_by(category_status) %>%
   count()
 
 count_infosci <- data %>%
@@ -192,7 +215,11 @@ count_infosci <- data %>%
   clean_names() %>%
   filter(grepl("Tenured Faculty|Tenure Track Faculty|Non-Tenured,Cont. Contr. Faculty|Non-Tenured, Term. Contr. Faculty|Non-Tenured, Non-Regular Faculty", category_status)) %>%
   filter(division == "College of Information Studies") %>%
-  group_by(primary_name) %>%
+  group_by(appt_base_annual_salary, primary_name, category_status) %>%
+  count()
+
+count_infosci <- count_infosci %>%
+  group_by(category_status) %>%
   count()
 
 count_jour <- data %>%
@@ -200,7 +227,11 @@ count_jour <- data %>%
   clean_names() %>%
   filter(grepl("Tenured Faculty|Tenure Track Faculty|Non-Tenured,Cont. Contr. Faculty|Non-Tenured, Term. Contr. Faculty|Non-Tenured, Non-Regular Faculty", category_status)) %>%
   filter(division == "Philip Merrill College of Journalism")%>%
-  group_by(primary_name) %>%
+  group_by(appt_base_annual_salary, primary_name, category_status) %>%
+  count()
+
+count_jour <- count_jour %>%
+  group_by(category_status) %>%
   count()
 
 count_business <- data %>%
@@ -208,7 +239,11 @@ count_business <- data %>%
   clean_names() %>%
   filter(grepl("Tenured Faculty|Tenure Track Faculty|Non-Tenured,Cont. Contr. Faculty|Non-Tenured, Term. Contr. Faculty|Non-Tenured, Non-Regular Faculty", category_status)) %>%
   filter(division == "Robert H. Smith School of Business") %>%
-  group_by(primary_name) %>%
+  group_by(appt_base_annual_salary, primary_name, category_status) %>%
+  count()
+
+count_business <- count_business %>%
+  group_by(category_status) %>%
   count()
 
 count_arch <- data %>%
@@ -216,7 +251,11 @@ count_arch <- data %>%
   clean_names() %>%
   filter(grepl("Tenured Faculty|Tenure Track Faculty|Non-Tenured,Cont. Contr. Faculty|Non-Tenured, Term. Contr. Faculty|Non-Tenured, Non-Regular Faculty", category_status)) %>%
   filter(division == "School of Architecture, Planning, & Preservation")%>%
-  group_by(primary_name) %>%
+  group_by(appt_base_annual_salary, primary_name, category_status) %>%
+  count()
+
+count_arch <- count_arch %>%
+  group_by(category_status) %>%
   count()
 
 count_sph <- data %>%
@@ -224,7 +263,11 @@ count_sph <- data %>%
   clean_names() %>%
   filter(grepl("Tenured Faculty|Tenure Track Faculty|Non-Tenured,Cont. Contr. Faculty|Non-Tenured, Term. Contr. Faculty|Non-Tenured, Non-Regular Faculty", category_status)) %>%
   filter(division == "School of Public Health")%>%
-  group_by(primary_name) %>%
+  group_by(appt_base_annual_salary, primary_name, category_status) %>%
+  count()
+
+count_sph <- count_sph %>%
+  group_by(category_status) %>%
   count()
 
 count_policy <- data %>%
@@ -232,7 +275,11 @@ count_policy <- data %>%
   clean_names() %>%
   filter(grepl("Tenured Faculty|Tenure Track Faculty|Non-Tenured,Cont. Contr. Faculty|Non-Tenured, Term. Contr. Faculty|Non-Tenured, Non-Regular Faculty", category_status)) %>%
   filter(division == "School of Public Policy")%>%
-  group_by(primary_name) %>%
+  group_by(appt_base_annual_salary, primary_name, category_status) %>%
+  count()
+
+count_policy <- count_policy %>%
+  group_by(category_status) %>%
   count()
   
 
@@ -437,6 +484,915 @@ min_policy <- data %>%
   slice_min(appt_base_annual_salary, n = 1)
 
 ```
+
+# numbers of each position total and by division
+
+```{r}
+
+count_agr <- data %>%
+  as.data.frame() %>%
+  clean_names() %>%
+  filter(grepl("Tenured Faculty|Tenure Track Faculty|Non-Tenured,Cont. Contr. Faculty|Non-Tenured, Term. Contr. Faculty|Non-Tenured, Non-Regular Faculty", category_status)) %>%
+  filter(division == "College of Agriculture & Natural Resources") %>%
+  group_by(appt_base_annual_salary, primary_name, category_status) %>%
+  count()
+
+count_agr <- count_agr %>%
+  group_by(category_status) %>%
+  count()
+
+position_count <- data %>%
+  as.data.frame() %>%
+  clean_names() %>%
+  filter(grepl("Tenured Faculty|Tenure Track Faculty|Non-Tenured,Cont. Contr. Faculty|Non-Tenured, Term. Contr. Faculty|Non-Tenured, Non-Regular Faculty", category_status)) %>%
+  group_by(category_status) %>%
+  count()
+
+pos_engineering <- data %>%
+  as.data.frame() %>%
+  clean_names() %>%
+  filter(grepl("Tenured Faculty|Tenure Track Faculty|Non-Tenured,Cont. Contr. Faculty|Non-Tenured, Term. Contr. Faculty|Non-Tenured, Non-Regular Faculty", category_status)) %>%
+  filter(division == "A. James Clark School of Engineering") %>%
+  group_by(category_status) %>%
+  count()
+
+pos_cmns <- data %>%
+  as.data.frame() %>%
+  clean_names() %>%
+  filter(grepl("Tenured Faculty|Tenure Track Faculty|Non-Tenured,Cont. Contr. Faculty|Non-Tenured, Term. Contr. Faculty|Non-Tenured, Non-Regular Faculty", category_status)) %>%
+  filter(division == "College of Computer, Math & Natural Sciences") %>%
+  group_by(category_status) %>%
+  count()
+
+pos_agr <- data %>%
+  as.data.frame() %>%
+  clean_names() %>%
+  filter(grepl("Tenured Faculty|Tenure Track Faculty|Non-Tenured,Cont. Contr. Faculty|Non-Tenured, Term. Contr. Faculty|Non-Tenured, Non-Regular Faculty", category_status)) %>%
+  filter(division == "College of Agriculture & Natural Resources") %>%
+  group_by(category_status) %>%
+  count()
+
+pos_arhu <- data %>%
+  as.data.frame() %>%
+  clean_names() %>%
+  filter(grepl("Tenured Faculty|Tenure Track Faculty|Non-Tenured,Cont. Contr. Faculty|Non-Tenured, Term. Contr. Faculty|Non-Tenured, Non-Regular Faculty", category_status)) %>%
+  filter(division == "College of Arts & Humanities") %>%
+  group_by(category_status) %>%
+  count()
+
+pos_bsos <- data %>%
+  as.data.frame() %>%
+  clean_names() %>%
+  filter(grepl("Tenured Faculty|Tenure Track Faculty|Non-Tenured,Cont. Contr. Faculty|Non-Tenured, Term. Contr. Faculty|Non-Tenured, Non-Regular Faculty", category_status)) %>%
+  filter(division == "College of Behavioral & Social Sciences") %>%
+  group_by(category_status) %>%
+  count()
+
+pos_education <- data %>%
+  as.data.frame() %>%
+  clean_names() %>%
+  filter(grepl("Tenured Faculty|Tenure Track Faculty|Non-Tenured,Cont. Contr. Faculty|Non-Tenured, Term. Contr. Faculty|Non-Tenured, Non-Regular Faculty", category_status)) %>%
+  filter(division == "College of Education") %>%
+  group_by(category_status) %>%
+  count()
+
+pos_infosci <- data %>%
+  as.data.frame() %>%
+  clean_names() %>%
+  filter(grepl("Tenured Faculty|Tenure Track Faculty|Non-Tenured,Cont. Contr. Faculty|Non-Tenured, Term. Contr. Faculty|Non-Tenured, Non-Regular Faculty", category_status)) %>%
+  filter(division == "College of Information Studies") %>%
+  group_by(category_status) %>%
+  count()
+
+pos_jour <- data %>%
+  as.data.frame() %>%
+  clean_names() %>%
+  filter(grepl("Tenured Faculty|Tenure Track Faculty|Non-Tenured,Cont. Contr. Faculty|Non-Tenured, Term. Contr. Faculty|Non-Tenured, Non-Regular Faculty", category_status)) %>%
+  filter(division == "Philip Merrill College of Journalism")  %>%
+  group_by(category_status) %>%
+  count()
+
+pos_business <- data %>%
+  as.data.frame() %>%
+  clean_names() %>%
+  filter(grepl("Tenured Faculty|Tenure Track Faculty|Non-Tenured,Cont. Contr. Faculty|Non-Tenured, Term. Contr. Faculty|Non-Tenured, Non-Regular Faculty", category_status)) %>%
+  filter(division == "Robert H. Smith School of Business") %>%
+  group_by(category_status) %>%
+  count()
+
+pos_arch <- data %>%
+  as.data.frame() %>%
+  clean_names() %>%
+  filter(grepl("Tenured Faculty|Tenure Track Faculty|Non-Tenured,Cont. Contr. Faculty|Non-Tenured, Term. Contr. Faculty|Non-Tenured, Non-Regular Faculty", category_status)) %>%
+  filter(division == "School of Architecture, Planning, & Preservation")  %>%
+  group_by(category_status) %>%
+  count()
+
+pos_sph <- data %>%
+  as.data.frame() %>%
+  clean_names() %>%
+  filter(grepl("Tenured Faculty|Tenure Track Faculty|Non-Tenured,Cont. Contr. Faculty|Non-Tenured, Term. Contr. Faculty|Non-Tenured, Non-Regular Faculty", category_status)) %>%
+  filter(division == "School of Public Health") %>%
+  group_by(category_status) %>%
+  count()
+
+pos_policy <- data %>%
+  as.data.frame() %>%
+  clean_names() %>%
+  filter(grepl("Tenured Faculty|Tenure Track Faculty|Non-Tenured,Cont. Contr. Faculty|Non-Tenured, Term. Contr. Faculty|Non-Tenured, Non-Regular Faculty", category_status)) %>%
+  filter(division == "School of Public Policy") %>%
+  group_by(category_status) %>%
+  count()
+  
+
+pos_counts <- list('pos_all' = position_count, 'pos_eng' = pos_engineering, 'pos_agr' = pos_agr, 'pos_arhu' = pos_arhu, 'pos_bsos' = pos_bsos, 'pos_cmns' = pos_cmns, 'pos_inst' = pos_infosci, 'pos_jour' = pos_jour, 'pos_business' = pos_business, 'pos_arch' = pos_arch, 'pos_sph' = pos_sph, 'pos_policy' = pos_policy, 'pos_education' = pos_education)
+write.xlsx(pos_counts, file = 'C:/Users/Vstav/OneDrive/Documents/GitHub/328t/final_proj/pos_counts.xlsx')
+
+```
+# eng avg salary by faculty positions
+```{r}
+
+avg_eng1 <- data %>%
+  clean_names() %>%
+  filter(division == "A. James Clark School of Engineering") %>%
+  filter(grepl("Tenured Faculty", category_status)) %>%
+  mutate(appt_base_annual_salary = as.numeric(appt_base_annual_salary)) %>%
+  summarise(
+    appt_base_annual_salary = median(appt_base_annual_salary, na.rm=TRUE)
+  )
+
+avg_eng2 <- data %>%
+  clean_names() %>%
+  filter(division == "A. James Clark School of Engineering") %>%
+  filter(grepl("Tenure Track Faculty", category_status)) %>%
+  mutate(appt_base_annual_salary = as.numeric(appt_base_annual_salary)) %>%
+  summarise(
+    appt_base_annual_salary = median(appt_base_annual_salary, na.rm=TRUE)
+  )
+
+avg_eng3 <- data %>%
+  clean_names() %>%
+  filter(division == "A. James Clark School of Engineering") %>%
+  filter(grepl("Non-Tenured,Cont. Contr. Faculty", category_status)) %>%
+  mutate(appt_base_annual_salary = as.numeric(appt_base_annual_salary)) %>%
+  summarise(
+    appt_base_annual_salary = median(appt_base_annual_salary, na.rm=TRUE)
+  )
+
+avg_eng4 <- data %>%
+  clean_names() %>%
+  filter(division == "A. James Clark School of Engineering") %>%
+  filter(grepl("Non-Tenured, Term. Contr. Faculty", category_status)) %>%
+  mutate(appt_base_annual_salary = as.numeric(appt_base_annual_salary)) %>%
+  summarise(
+    appt_base_annual_salary = median(appt_base_annual_salary, na.rm=TRUE)
+  )
+
+avg_eng5 <- data %>%
+  clean_names() %>%
+  filter(division == "A. James Clark School of Engineering") %>%
+  filter(grepl("Non-Tenured, Non-Regular Faculty", category_status)) %>%
+  mutate(appt_base_annual_salary = as.numeric(appt_base_annual_salary)) %>%
+  summarise(
+    appt_base_annual_salary = median(appt_base_annual_salary, na.rm=TRUE)
+  )
+  
+
+```
+
+# agr avg salary by faculty positions
+```{r}
+
+avg_agr1 <- data %>%
+  clean_names() %>%
+  filter(division == "College of Agriculture & Natural Resources") %>%
+  filter(grepl("Tenured Faculty", category_status)) %>%
+  mutate(appt_base_annual_salary = as.numeric(appt_base_annual_salary)) %>%
+  summarise(
+    appt_base_annual_salary = median(appt_base_annual_salary, na.rm=TRUE)
+  )
+
+avg_agr2 <- data %>%
+  clean_names() %>%
+  filter(division == "College of Agriculture & Natural Resources") %>%
+  filter(grepl("Tenure Track Faculty", category_status)) %>%
+  mutate(appt_base_annual_salary = as.numeric(appt_base_annual_salary)) %>%
+  summarise(
+    appt_base_annual_salary = median(appt_base_annual_salary, na.rm=TRUE)
+  )
+
+avg_agr3 <- data %>%
+  clean_names() %>%
+  filter(division == "College of Agriculture & Natural Resources") %>%
+  filter(grepl("Non-Tenured,Cont. Contr. Faculty", category_status)) %>%
+  mutate(appt_base_annual_salary = as.numeric(appt_base_annual_salary)) %>%
+  summarise(
+    appt_base_annual_salary = median(appt_base_annual_salary, na.rm=TRUE)
+  )
+
+avg_agr4 <- data %>%
+  clean_names() %>%
+  filter(division == "College of Agriculture & Natural Resources") %>%
+  filter(grepl("Non-Tenured, Term. Contr. Faculty", category_status)) %>%
+  mutate(appt_base_annual_salary = as.numeric(appt_base_annual_salary)) %>%
+  summarise(
+    appt_base_annual_salary = median(appt_base_annual_salary, na.rm=TRUE)
+  )
+
+avg_agr5 <- data %>%
+  clean_names() %>%
+  filter(division == "College of Agriculture & Natural Resources") %>%
+  filter(grepl("Non-Tenured, Non-Regular Faculty", category_status)) %>%
+  mutate(appt_base_annual_salary = as.numeric(appt_base_annual_salary)) %>%
+  summarise(
+    appt_base_annual_salary = median(appt_base_annual_salary, na.rm=TRUE)
+  )
+```
+
+
+# arhu avg salary by faculty positions
+```{r}
+
+avg_arhu1 <- data %>%
+  clean_names() %>%
+  filter(division == "College of Arts & Humanities") %>%
+  filter(grepl("Tenured Faculty", category_status)) %>%
+  mutate(appt_base_annual_salary = as.numeric(appt_base_annual_salary)) %>%
+  summarise(
+    appt_base_annual_salary = median(appt_base_annual_salary, na.rm=TRUE)
+  )
+
+avg_arhu2 <- data %>%
+  clean_names() %>%
+  filter(division == "College of Arts & Humanities") %>%
+  filter(grepl("Tenure Track Faculty", category_status)) %>%
+  mutate(appt_base_annual_salary = as.numeric(appt_base_annual_salary)) %>%
+  summarise(
+    appt_base_annual_salary = median(appt_base_annual_salary, na.rm=TRUE)
+  )
+
+avg_arhu3 <- data %>%
+  clean_names() %>%
+  filter(division == "College of Arts & Humanities") %>%
+  filter(grepl("Non-Tenured,Cont. Contr. Faculty", category_status)) %>%
+  mutate(appt_base_annual_salary = as.numeric(appt_base_annual_salary)) %>%
+  summarise(
+    appt_base_annual_salary = median(appt_base_annual_salary, na.rm=TRUE)
+  )
+
+avg_arhu4 <- data %>%
+  clean_names() %>%
+  filter(division == "College of Arts & Humanities") %>%
+  filter(grepl("Non-Tenured, Term. Contr. Faculty", category_status)) %>%
+  mutate(appt_base_annual_salary = as.numeric(appt_base_annual_salary)) %>%
+  summarise(
+    appt_base_annual_salary = median(appt_base_annual_salary, na.rm=TRUE)
+  )
+
+avg_arhu5 <- data %>%
+  clean_names() %>%
+  filter(division == "College of Arts & Humanities") %>%
+  filter(grepl("Non-Tenured, Non-Regular Faculty", category_status)) %>%
+  mutate(appt_base_annual_salary = as.numeric(appt_base_annual_salary)) %>%
+  summarise(
+    appt_base_annual_salary = median(appt_base_annual_salary, na.rm=TRUE)
+  )
+```
+
+
+# bsos avg salary by faculty positions
+```{r}
+
+avg_bsos1 <- data %>%
+  clean_names() %>%
+  filter(division == "College of Behavioral & Social Sciences") %>%
+  filter(grepl("Tenured Faculty", category_status)) %>%
+  mutate(appt_base_annual_salary = as.numeric(appt_base_annual_salary)) %>%
+  summarise(
+    appt_base_annual_salary = median(appt_base_annual_salary, na.rm=TRUE)
+  )
+
+avg_bsos2 <- data %>%
+  clean_names() %>%
+  filter(division == "College of Behavioral & Social Sciences") %>%
+  filter(grepl("Tenure Track Faculty", category_status)) %>%
+  mutate(appt_base_annual_salary = as.numeric(appt_base_annual_salary)) %>%
+  summarise(
+    appt_base_annual_salary = median(appt_base_annual_salary, na.rm=TRUE)
+  )
+
+avg_bsos3 <- data %>%
+  clean_names() %>%
+  filter(division == "College of Behavioral & Social Sciences") %>%
+  filter(grepl("Non-Tenured,Cont. Contr. Faculty", category_status)) %>%
+  mutate(appt_base_annual_salary = as.numeric(appt_base_annual_salary)) %>%
+  summarise(
+    appt_base_annual_salary = median(appt_base_annual_salary, na.rm=TRUE)
+  )
+
+avg_bsos4 <- data %>%
+  clean_names() %>%
+  filter(division == "College of Behavioral & Social Sciences") %>%
+  filter(grepl("Non-Tenured, Term. Contr. Faculty", category_status)) %>%
+  mutate(appt_base_annual_salary = as.numeric(appt_base_annual_salary)) %>%
+  summarise(
+    appt_base_annual_salary = median(appt_base_annual_salary, na.rm=TRUE)
+  )
+
+avg_bsos5 <- data %>%
+  clean_names() %>%
+  filter(division == "College of Behavioral & Social Sciences") %>%
+  filter(grepl("Non-Tenured, Non-Regular Faculty", category_status)) %>%
+  mutate(appt_base_annual_salary = as.numeric(appt_base_annual_salary)) %>%
+  summarise(
+    appt_base_annual_salary = median(appt_base_annual_salary, na.rm=TRUE)
+  )
+```
+
+# cmns avg salary by faculty positions
+```{r}
+
+avg_cmns1 <- data %>%
+  clean_names() %>%
+  filter(division == "College of Computer, Math & Natural Sciences") %>%
+  filter(grepl("Tenured Faculty", category_status)) %>%
+  mutate(appt_base_annual_salary = as.numeric(appt_base_annual_salary)) %>%
+  summarise(
+    appt_base_annual_salary = median(appt_base_annual_salary, na.rm=TRUE)
+  )
+
+avg_cmns2 <- data %>%
+  clean_names() %>%
+  filter(division == "College of Computer, Math & Natural Sciences") %>%
+  filter(grepl("Tenure Track Faculty", category_status)) %>%
+  mutate(appt_base_annual_salary = as.numeric(appt_base_annual_salary)) %>%
+  summarise(
+    appt_base_annual_salary = median(appt_base_annual_salary, na.rm=TRUE)
+  )
+
+avg_cmns3 <- data %>%
+  clean_names() %>%
+  filter(division == "College of Computer, Math & Natural Sciences") %>%
+  filter(grepl("Non-Tenured,Cont. Contr. Faculty", category_status)) %>%
+  mutate(appt_base_annual_salary = as.numeric(appt_base_annual_salary)) %>%
+  summarise(
+    appt_base_annual_salary = median(appt_base_annual_salary, na.rm=TRUE)
+  )
+
+avg_cmns4 <- data %>%
+  clean_names() %>%
+  filter(division == "College of Computer, Math & Natural Sciences") %>%
+  filter(grepl("Non-Tenured, Term. Contr. Faculty", category_status)) %>%
+  mutate(appt_base_annual_salary = as.numeric(appt_base_annual_salary)) %>%
+  summarise(
+    appt_base_annual_salary = median(appt_base_annual_salary, na.rm=TRUE)
+  )
+
+avg_cmns5 <- data %>%
+  clean_names() %>%
+  filter(division == "College of Computer, Math & Natural Sciences") %>%
+  filter(grepl("Non-Tenured, Non-Regular Faculty", category_status)) %>%
+  mutate(appt_base_annual_salary = as.numeric(appt_base_annual_salary)) %>%
+  summarise(
+    appt_base_annual_salary = median(appt_base_annual_salary, na.rm=TRUE)
+  )
+```
+
+
+# inst avg salary by faculty positions
+```{r}
+
+avg_inst1 <- data %>%
+  clean_names() %>%
+  filter(division == "College of Information Studies") %>%
+  filter(grepl("Tenured Faculty", category_status)) %>%
+  mutate(appt_base_annual_salary = as.numeric(appt_base_annual_salary)) %>%
+  summarise(
+    appt_base_annual_salary = median(appt_base_annual_salary, na.rm=TRUE)
+  )
+
+avg_inst2 <- data %>%
+  clean_names() %>%
+  filter(division == "College of Information Studies") %>%
+  filter(grepl("Tenure Track Faculty", category_status)) %>%
+  mutate(appt_base_annual_salary = as.numeric(appt_base_annual_salary)) %>%
+  summarise(
+    appt_base_annual_salary = median(appt_base_annual_salary, na.rm=TRUE)
+  )
+
+avg_inst3 <- data %>%
+  clean_names() %>%
+  filter(division == "College of Information Studies") %>%
+  filter(grepl("Non-Tenured,Cont. Contr. Faculty", category_status)) %>%
+  mutate(appt_base_annual_salary = as.numeric(appt_base_annual_salary)) %>%
+  summarise(
+    appt_base_annual_salary = median(appt_base_annual_salary, na.rm=TRUE)
+  )
+
+avg_inst4 <- data %>%
+  clean_names() %>%
+  filter(division == "College of Information Studies") %>%
+  filter(grepl("Non-Tenured, Term. Contr. Faculty", category_status)) %>%
+  mutate(appt_base_annual_salary = as.numeric(appt_base_annual_salary)) %>%
+  summarise(
+    appt_base_annual_salary = median(appt_base_annual_salary, na.rm=TRUE)
+  )
+
+avg_inst5 <- data %>%
+  clean_names() %>%
+  filter(division == "College of Information Studies") %>%
+  filter(grepl("Non-Tenured, Non-Regular Faculty", category_status)) %>%
+  mutate(appt_base_annual_salary = as.numeric(appt_base_annual_salary)) %>%
+  summarise(
+    appt_base_annual_salary = median(appt_base_annual_salary, na.rm=TRUE)
+  )
+```
+
+# jour avg salary by faculty positions
+```{r}
+
+avg_jour1 <- data %>%
+  clean_names() %>%
+  filter(division == "Philip Merrill College of Journalism") %>%
+  filter(grepl("Tenured Faculty", category_status)) %>%
+  mutate(appt_base_annual_salary = as.numeric(appt_base_annual_salary)) %>%
+  summarise(
+    appt_base_annual_salary = median(appt_base_annual_salary, na.rm=TRUE)
+  )
+
+avg_jour2 <- data %>%
+  clean_names() %>%
+  filter(division == "Philip Merrill College of Journalism") %>%
+  filter(grepl("Tenure Track Faculty", category_status)) %>%
+  mutate(appt_base_annual_salary = as.numeric(appt_base_annual_salary)) %>%
+  summarise(
+    appt_base_annual_salary = median(appt_base_annual_salary, na.rm=TRUE)
+  )
+
+avg_jour3 <- data %>%
+  clean_names() %>%
+  filter(division == "Philip Merrill College of Journalism") %>%
+  filter(grepl("Non-Tenured,Cont. Contr. Faculty", category_status)) %>%
+  mutate(appt_base_annual_salary = as.numeric(appt_base_annual_salary)) %>%
+  summarise(
+    appt_base_annual_salary = median(appt_base_annual_salary, na.rm=TRUE)
+  )
+
+avg_jour4 <- data %>%
+  clean_names() %>%
+  filter(division == "Philip Merrill College of Journalism") %>%
+  filter(grepl("Non-Tenured, Term. Contr. Faculty", category_status)) %>%
+  mutate(appt_base_annual_salary = as.numeric(appt_base_annual_salary)) %>%
+  summarise(
+    appt_base_annual_salary = median(appt_base_annual_salary, na.rm=TRUE)
+  )
+
+avg_jour5 <- data %>%
+  clean_names() %>%
+  filter(division == "Philip Merrill College of Journalism") %>%
+  filter(grepl("Non-Tenured, Non-Regular Faculty", category_status)) %>%
+  mutate(appt_base_annual_salary = as.numeric(appt_base_annual_salary)) %>%
+  summarise(
+    appt_base_annual_salary = median(appt_base_annual_salary, na.rm=TRUE)
+  )
+```
+
+
+# business avg salary by faculty positions
+```{r}
+
+avg_bus1 <- data %>%
+  clean_names() %>%
+  filter(division == "Robert H. Smith School of Business") %>%
+  filter(grepl("Tenured Faculty", category_status)) %>%
+  mutate(appt_base_annual_salary = as.numeric(appt_base_annual_salary)) %>%
+  summarise(
+    appt_base_annual_salary = median(appt_base_annual_salary, na.rm=TRUE)
+  )
+
+avg_bus2 <- data %>%
+  clean_names() %>%
+  filter(division == "Robert H. Smith School of Business") %>%
+  filter(grepl("Tenure Track Faculty", category_status)) %>%
+  mutate(appt_base_annual_salary = as.numeric(appt_base_annual_salary)) %>%
+  summarise(
+    appt_base_annual_salary = median(appt_base_annual_salary, na.rm=TRUE)
+  )
+
+avg_bus3 <- data %>%
+  clean_names() %>%
+  filter(division == "Robert H. Smith School of Business") %>%
+  filter(grepl("Non-Tenured,Cont. Contr. Faculty", category_status)) %>%
+  mutate(appt_base_annual_salary = as.numeric(appt_base_annual_salary)) %>%
+  summarise(
+    appt_base_annual_salary = median(appt_base_annual_salary, na.rm=TRUE)
+  )
+
+avg_bus4 <- data %>%
+  clean_names() %>%
+  filter(division == "Robert H. Smith School of Business") %>%
+  filter(grepl("Non-Tenured, Term. Contr. Faculty", category_status)) %>%
+  mutate(appt_base_annual_salary = as.numeric(appt_base_annual_salary)) %>%
+  summarise(
+    appt_base_annual_salary = median(appt_base_annual_salary, na.rm=TRUE)
+  )
+
+avg_bus5 <- data %>%
+  clean_names() %>%
+  filter(division == "Robert H. Smith School of Business") %>%
+  filter(grepl("Non-Tenured, Non-Regular Faculty", category_status)) %>%
+  mutate(appt_base_annual_salary = as.numeric(appt_base_annual_salary)) %>%
+  summarise(
+    appt_base_annual_salary = median(appt_base_annual_salary, na.rm=TRUE)
+  )
+```
+
+# arch avg salary by faculty positions
+```{r}
+
+avg_arch1 <- data %>%
+  clean_names() %>%
+  filter(division == "School of Architecture, Planning, & Preservation") %>%
+  filter(grepl("Tenured Faculty", category_status)) %>%
+  mutate(appt_base_annual_salary = as.numeric(appt_base_annual_salary)) %>%
+  summarise(
+    appt_base_annual_salary = median(appt_base_annual_salary, na.rm=TRUE)
+  )
+
+avg_arch2 <- data %>%
+  clean_names() %>%
+  filter(division == "School of Architecture, Planning, & Preservation") %>%
+  filter(grepl("Tenure Track Faculty", category_status)) %>%
+  mutate(appt_base_annual_salary = as.numeric(appt_base_annual_salary)) %>%
+  summarise(
+    appt_base_annual_salary = median(appt_base_annual_salary, na.rm=TRUE)
+  )
+
+avg_arch3 <- data %>%
+  clean_names() %>%
+  filter(division == "School of Architecture, Planning, & Preservation") %>%
+  filter(grepl("Non-Tenured,Cont. Contr. Faculty", category_status)) %>%
+  mutate(appt_base_annual_salary = as.numeric(appt_base_annual_salary)) %>%
+  summarise(
+    appt_base_annual_salary = median(appt_base_annual_salary, na.rm=TRUE)
+  )
+
+avg_arch4 <- data %>%
+  clean_names() %>%
+  filter(division == "School of Architecture, Planning, & Preservation") %>%
+  filter(grepl("Non-Tenured, Term. Contr. Faculty", category_status)) %>%
+  mutate(appt_base_annual_salary = as.numeric(appt_base_annual_salary)) %>%
+  summarise(
+    appt_base_annual_salary = median(appt_base_annual_salary, na.rm=TRUE)
+  )
+
+avg_arch5 <- data %>%
+  clean_names() %>%
+  filter(division == "School of Architecture, Planning, & Preservation") %>%
+  filter(grepl("Non-Tenured, Non-Regular Faculty", category_status)) %>%
+  mutate(appt_base_annual_salary = as.numeric(appt_base_annual_salary)) %>%
+  summarise(
+    appt_base_annual_salary = median(appt_base_annual_salary, na.rm=TRUE)
+  )
+```
+
+
+# sph avg salary by faculty positions
+```{r}
+
+avg_sph1 <- data %>%
+  clean_names() %>%
+  filter(division == "School of Public Health") %>%
+  filter(grepl("Tenured Faculty", category_status)) %>%
+  mutate(appt_base_annual_salary = as.numeric(appt_base_annual_salary)) %>%
+  summarise(
+    appt_base_annual_salary = median(appt_base_annual_salary, na.rm=TRUE)
+  )
+
+avg_sph2 <- data %>%
+  clean_names() %>%
+  filter(division == "School of Public Health") %>%
+  filter(grepl("Tenure Track Faculty", category_status)) %>%
+  mutate(appt_base_annual_salary = as.numeric(appt_base_annual_salary)) %>%
+  summarise(
+    appt_base_annual_salary = median(appt_base_annual_salary, na.rm=TRUE)
+  )
+
+avg_sph3 <- data %>%
+  clean_names() %>%
+  filter(division == "School of Public Health") %>%
+  filter(grepl("Non-Tenured,Cont. Contr. Faculty", category_status)) %>%
+  mutate(appt_base_annual_salary = as.numeric(appt_base_annual_salary)) %>%
+  summarise(
+    appt_base_annual_salary = median(appt_base_annual_salary, na.rm=TRUE)
+  )
+
+avg_sph4 <- data %>%
+  clean_names() %>%
+  filter(division == "School of Public Health") %>%
+  filter(grepl("Non-Tenured, Term. Contr. Faculty", category_status)) %>%
+  mutate(appt_base_annual_salary = as.numeric(appt_base_annual_salary)) %>%
+  summarise(
+    appt_base_annual_salary = median(appt_base_annual_salary, na.rm=TRUE)
+  )
+
+avg_sph5 <- data %>%
+  clean_names() %>%
+  filter(division == "School of Public Health") %>%
+  filter(grepl("Non-Tenured, Non-Regular Faculty", category_status)) %>%
+  mutate(appt_base_annual_salary = as.numeric(appt_base_annual_salary)) %>%
+  summarise(
+    appt_base_annual_salary = median(appt_base_annual_salary, na.rm=TRUE)
+  )
+```
+
+# policy avg salary by faculty positions
+```{r}
+
+avg_policy1 <- data %>%
+  clean_names() %>%
+  filter(division == "School of Public Policy") %>%
+  filter(grepl("Tenured Faculty", category_status)) %>%
+  mutate(appt_base_annual_salary = as.numeric(appt_base_annual_salary)) %>%
+  summarise(
+    appt_base_annual_salary = median(appt_base_annual_salary, na.rm=TRUE)
+  )
+
+avg_policy2 <- data %>%
+  clean_names() %>%
+  filter(division == "School of Public Policy") %>%
+  filter(grepl("Tenure Track Faculty", category_status)) %>%
+  mutate(appt_base_annual_salary = as.numeric(appt_base_annual_salary)) %>%
+  summarise(
+    appt_base_annual_salary = median(appt_base_annual_salary, na.rm=TRUE)
+  )
+
+avg_policy3 <- data %>%
+  clean_names() %>%
+  filter(division == "School of Public Policy") %>%
+  filter(grepl("Non-Tenured,Cont. Contr. Faculty", category_status)) %>%
+  mutate(appt_base_annual_salary = as.numeric(appt_base_annual_salary)) %>%
+  summarise(
+    appt_base_annual_salary = median(appt_base_annual_salary, na.rm=TRUE)
+  )
+
+avg_policy4 <- data %>%
+  clean_names() %>%
+  filter(division == "School of Public Policy") %>%
+  filter(grepl("Non-Tenured, Term. Contr. Faculty", category_status)) %>%
+  mutate(appt_base_annual_salary = as.numeric(appt_base_annual_salary)) %>%
+  summarise(
+    appt_base_annual_salary = median(appt_base_annual_salary, na.rm=TRUE)
+  )
+
+avg_policy5 <- data %>%
+  clean_names() %>%
+  filter(division == "School of Public Policy") %>%
+  filter(grepl("Non-Tenured, Non-Regular Faculty", category_status)) %>%
+  mutate(appt_base_annual_salary = as.numeric(appt_base_annual_salary)) %>%
+  summarise(
+    appt_base_annual_salary = median(appt_base_annual_salary, na.rm=TRUE)
+  )
+```
+
+# education avg salary by faculty positions
+```{r}
+
+avg_edu1 <- data %>%
+  clean_names() %>%
+  filter(division == "College of Education") %>%
+  filter(grepl("Tenured Faculty", category_status)) %>%
+  mutate(appt_base_annual_salary = as.numeric(appt_base_annual_salary)) %>%
+  summarise(
+    appt_base_annual_salary = median(appt_base_annual_salary, na.rm=TRUE)
+  )
+
+avg_edu2 <- data %>%
+  clean_names() %>%
+  filter(division == "College of Education") %>%
+  filter(grepl("Tenure Track Faculty", category_status)) %>%
+  mutate(appt_base_annual_salary = as.numeric(appt_base_annual_salary)) %>%
+  summarise(
+    appt_base_annual_salary = median(appt_base_annual_salary, na.rm=TRUE)
+  )
+
+avg_edu3 <- data %>%
+  clean_names() %>%
+  filter(division == "College of Education") %>%
+  filter(grepl("Non-Tenured,Cont. Contr. Faculty", category_status)) %>%
+  mutate(appt_base_annual_salary = as.numeric(appt_base_annual_salary)) %>%
+  summarise(
+    appt_base_annual_salary = median(appt_base_annual_salary, na.rm=TRUE)
+  )
+
+avg_edu4 <- data %>%
+  clean_names() %>%
+  filter(division == "College of Education") %>%
+  filter(grepl("Non-Tenured, Term. Contr. Faculty", category_status)) %>%
+  mutate(appt_base_annual_salary = as.numeric(appt_base_annual_salary)) %>%
+  summarise(
+    appt_base_annual_salary = median(appt_base_annual_salary, na.rm=TRUE)
+  )
+
+avg_edu5 <- data %>%
+  clean_names() %>%
+  filter(division == "College of Education") %>%
+  filter(grepl("Non-Tenured, Non-Regular Faculty", category_status)) %>%
+  mutate(appt_base_annual_salary = as.numeric(appt_base_annual_salary)) %>%
+  summarise(
+    appt_base_annual_salary = median(appt_base_annual_salary, na.rm=TRUE)
+  )
+```
+
+# all college avgs
+```{r}
+
+avg_all1 <- data %>%
+  clean_names() %>%
+  select(division, category_status, category_status_cd, appt_base_annual_salary, primary_name) %>%
+  filter(grepl("Tenured Faculty", category_status)) %>%
+  filter(!str_detect("VP Research|Graduate School|Undergraduate Studies| Office of the President|Sr VP Academic Affairs & Provost|VP Student Affairs|Universities at Shady Grove|Office of Extended Studies|Libraries", division)) %>%
+  mutate(appt_base_annual_salary = as.numeric(appt_base_annual_salary)) %>%
+  summarise(
+    appt_base_annual_salary = median(appt_base_annual_salary, na.rm=TRUE)
+  )
+
+avg_all2 <- data %>%
+  clean_names() %>%
+  select(division, category_status, category_status_cd, appt_base_annual_salary, primary_name) %>%
+  filter(grepl("Tenure Track Faculty", category_status)) %>%
+  filter(!str_detect("VP Research|Graduate School|Undergraduate Studies| Office of the President|Sr VP Academic Affairs & Provost|VP Student Affairs|Universities at Shady Grove|Office of Extended Studies|Libraries", division)) %>%
+  mutate(appt_base_annual_salary = as.numeric(appt_base_annual_salary)) %>%
+  summarise(
+    appt_base_annual_salary = median(appt_base_annual_salary, na.rm=TRUE)
+  )
+
+avg_all3 <- data %>%
+  clean_names() %>%
+  select(division, category_status, category_status_cd, appt_base_annual_salary, primary_name) %>%
+  filter(grepl("Non-Tenured,Cont. Contr. Faculty", category_status)) %>%
+  filter(!str_detect("VP Research|Graduate School|Undergraduate Studies| Office of the President|Sr VP Academic Affairs & Provost|VP Student Affairs|Universities at Shady Grove|Office of Extended Studies|Libraries", division)) %>%
+  mutate(appt_base_annual_salary = as.numeric(appt_base_annual_salary)) %>%
+  summarise(
+    appt_base_annual_salary = median(appt_base_annual_salary, na.rm=TRUE)
+  )
+
+avg_all4 <- data %>%
+  clean_names() %>%
+  select(division, category_status, category_status_cd, appt_base_annual_salary, primary_name) %>%
+  filter(grepl("Non-Tenured, Term. Contr. Faculty", category_status)) %>%
+  filter(!str_detect("VP Research|Graduate School|Undergraduate Studies| Office of the President|Sr VP Academic Affairs & Provost|VP Student Affairs|Universities at Shady Grove|Office of Extended Studies|Libraries", division)) %>%
+  mutate(appt_base_annual_salary = as.numeric(appt_base_annual_salary)) %>%
+  summarise(
+    appt_base_annual_salary = median(appt_base_annual_salary, na.rm=TRUE)
+  )
+
+avg_all5 <- data %>%
+  clean_names() %>%
+  select(division, category_status, category_status_cd, appt_base_annual_salary, primary_name) %>%
+  filter(grepl("Non-Tenured, Non-Regular Faculty", category_status)) %>%
+  filter(!str_detect("VP Research|Graduate School|Undergraduate Studies| Office of the President|Sr VP Academic Affairs & Provost|VP Student Affairs|Universities at Shady Grove|Office of Extended Studies|Libraries", division)) %>%
+  mutate(appt_base_annual_salary = as.numeric(appt_base_annual_salary)) %>%
+  summarise(
+    appt_base_annual_salary = median(appt_base_annual_salary, na.rm=TRUE)
+  )
+
+```
+
+
+# tenure faculty salary by division
+
+```{r}
+
+avg_engineering <- data %>%
+  as.data.frame() %>%
+  clean_names() %>%
+  filter(division == "A. James Clark School of Engineering") %>%
+  filter(grepl("Tenured Faculty|Tenure Track Faculty|Non-Tenured,Cont. Contr. Faculty|Non-Tenured, Term. Contr. Faculty|Non-Tenured, Non-Regular Faculty", category_status)) %>%
+  mutate(appt_base_annual_salary = as.numeric(appt_base_annual_salary)) %>%
+  summarise(
+    appt_base_annual_salary = median(appt_base_annual_salary, na.rm=TRUE)
+  )
+
+noncmns <- salary_2022 %>%
+  as.data.frame() %>%
+  clean_names() %>%
+  filter(division == "College of Computer, Math & Natural Sciences") %>%
+  filter(category_status_cd %in%  c("15", "03", "37")) %>%
+  mutate(appt_base_annual_salary = as.numeric(appt_base_annual_salary)) %>%
+  summarise(
+    appt_base_annual_salary = median(appt_base_annual_salary, na.rm=TRUE)
+  )
+
+nonpres <- salary_2022 %>%
+  as.data.frame() %>%
+  clean_names() %>%
+  filter(division == "Office of the President")%>%
+  filter(category_status_cd %in%  c("15", "03", "37")) %>%
+  mutate(appt_base_annual_salary = as.numeric(appt_base_annual_salary)) %>%
+  summarise(
+    appt_base_annual_salary = median(appt_base_annual_salary, na.rm=TRUE)
+  )
+
+nonagr <- salary_2022 %>%
+  as.data.frame() %>%
+  clean_names() %>%
+  filter(division == "College of Agriculture & Natural Resources") %>%
+  filter(category_status_cd %in%  c("15", "03", "37")) %>%
+  mutate(appt_base_annual_salary = as.numeric(appt_base_annual_salary)) %>%
+  summarise(
+    appt_base_annual_salary = median(appt_base_annual_salary, na.rm=TRUE)
+  )
+
+nonarhu <- salary_2022 %>%
+  as.data.frame() %>%
+  clean_names() %>%
+  filter(division == "College of Arts & Humanities") %>%
+  filter(category_status_cd %in%  c("15", "03", "37")) %>%
+  mutate(appt_base_annual_salary = as.numeric(appt_base_annual_salary)) %>%
+  summarise(
+    appt_base_annual_salary = median(appt_base_annual_salary, na.rm=TRUE)
+  )
+
+nonbsos <- salary_2022 %>%
+  as.data.frame() %>%
+  clean_names() %>%
+  filter(division == "College of Behavioral & Social Sciences") %>%
+  filter(category_status_cd %in%  c("15", "03", "37")) %>%
+  mutate(appt_base_annual_salary = as.numeric(appt_base_annual_salary)) %>%
+  summarise(
+    appt_base_annual_salary = median(appt_base_annual_salary, na.rm=TRUE)
+  )
+
+noneducation <- salary_2022 %>%
+  as.data.frame() %>%
+  clean_names() %>%
+  filter(division == "College of Education") %>%
+  filter(category_status_cd %in%  c("15", "03", "37")) %>%
+  mutate(appt_base_annual_salary = as.numeric(appt_base_annual_salary)) %>%
+  summarise(
+    appt_base_annual_salary = median(appt_base_annual_salary, na.rm=TRUE)
+  )
+
+noninfosci <- salary_2022 %>%
+  as.data.frame() %>%
+  clean_names() %>%
+  filter(division == "College of Information Studies") %>%
+  filter(category_status_cd %in%  c("15", "03", "37")) %>%
+  mutate(appt_base_annual_salary = as.numeric(appt_base_annual_salary)) %>%
+  summarise(
+    appt_base_annual_salary = median(appt_base_annual_salary, na.rm=TRUE)
+  )
+
+nonjour <- salary_2022 %>%
+  as.data.frame() %>%
+  clean_names() %>%
+  filter(division == "Philip Merrill College of Journalism") %>%
+  filter(category_status_cd %in%  c("15", "03", "37")) %>%
+  mutate(appt_base_annual_salary = as.numeric(appt_base_annual_salary)) %>%
+  summarise(
+    appt_base_annual_salary = median(appt_base_annual_salary, na.rm=TRUE)
+  )
+
+nonbusiness <- salary_2022 %>%
+  as.data.frame() %>%
+  clean_names() %>%
+  filter(division == "Robert H. Smith School of Business") %>%
+  filter(category_status_cd %in%  c("15", "03", "37")) %>%
+  mutate(appt_base_annual_salary = as.numeric(appt_base_annual_salary)) %>%
+  summarise(
+    appt_base_annual_salary = median(appt_base_annual_salary, na.rm=TRUE)
+  )
+
+nonarchitecture <- salary_2022 %>%
+  as.data.frame() %>%
+  clean_names() %>%
+  filter(division == "School of Architecture, Planning, & Preservation") %>%
+  filter(category_status_cd %in%  c("15", "03", "37")) %>%
+  mutate(appt_base_annual_salary = as.numeric(appt_base_annual_salary)) %>%
+  summarise(
+    appt_base_annual_salary = median(appt_base_annual_salary, na.rm=TRUE)
+  )
+
+nonsph <- salary_2022 %>%
+  as.data.frame() %>%
+  clean_names() %>%
+  filter(division == "School of Public Health") %>%
+  filter(category_status_cd %in%  c("15", "03", "37")) %>%
+  mutate(appt_base_annual_salary = as.numeric(appt_base_annual_salary)) %>%
+  summarise(
+    appt_base_annual_salary = median(appt_base_annual_salary, na.rm=TRUE)
+  )
+
+nonpolicy <- salary_2022 %>%
+  as.data.frame() %>%
+  clean_names() %>%
+  filter(division == "School of Public Policy") %>%
+  filter(category_status_cd %in%  c("15", "03", "37")) %>%
+  mutate(appt_base_annual_salary = as.numeric(appt_base_annual_salary)) %>%
+  summarise(
+    appt_base_annual_salary = median(appt_base_annual_salary, na.rm=TRUE)
+  )
 
 
 
